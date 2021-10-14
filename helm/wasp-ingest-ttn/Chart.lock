@@ -1,0 +1,15 @@
+dependencies:
+- name: redis
+  repository: https://charts.bitnami.com/bitnami
+  version: 14.1.0
+- name: kafka
+  repository: https://charts.bitnami.com/bitnami
+  version: 12.7.3
+- name: mosquitto
+  repository: https://k8s-at-home.com/charts/
+  version: 0.7.0
+- name: nginx
+  repository: https://charts.bitnami.com/bitnami
+  version: 8.9.0
+digest: sha256:5f3deb6b284713502afe585821979267c4ac4d90be5425c7ae70d50ba59f4ba1
+generated: "2021-05-04T12:13:36.654199+01:00"

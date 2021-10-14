@@ -1,12 +1,19 @@
+// server to handle health check request
+
 const express = require('express')
 const pinoHttp = require('pino-http')
+
+const startMessagePipeline = require('./messagePipeline')
 const { PORT } = require('./env')
 const logger = require('./logger')
 
 async function createHttpServer() {
   const app = express()
+
   const requestLogger = pinoHttp({ logger })
 
+  // I'm leaving this in even though it's not used initially
+  // just in case we add other routes. It's good boilerplate
   app.use((req, res, next) => {
     if (req.path !== '/health') requestLogger(req, res)
     next()
@@ -19,59 +26,22 @@ async function createHttpServer() {
   // Sorry - app.use checks arity
   // eslint-disable-next-line no-unused-vars
   app.use((err, req, res, next) => {
-    if (err.status) {
-      res.status(err.status).send({ error: err.status === 401 ? 'Unauthorised' : err.message })
-    } else {
-      logger.error('Fallback Error %j', err.stack)
-      res.status(500).send('Fatal error!')
-    }
+    logger.error('Fallback Error %j', err.stack)
+    res.status(500).send('Fatal error!')
   })
 
-  return { app }
+  await startMessagePipeline()
+
+  return app
 }
 
-/* istanbul ignore next */
 async function startServer() {
-  try {
-    const { app } = await createHttpServer()
+  const app = await createHttpServer()
 
-    const setupGracefulExit = ({ sigName, server, exitCode }) => {
-      process.on(sigName, async () => {
-        server.close(() => {
-          process.exit(exitCode)
-        })
-      })
-    }
-
-    const server = await new Promise((resolve, reject) => {
-      let resolved = false
-      const server = app.listen(PORT, (err) => {
-        if (err) {
-          if (!resolved) {
-            resolved = true
-            reject(err)
-          }
-        }
-        logger.info(`Listening on port ${PORT} `)
-        if (!resolved) {
-          resolved = true
-          resolve(server)
-        }
-      })
-      server.on('error', (err) => {
-        if (!resolved) {
-          resolved = true
-          reject(err)
-        }
-      })
-    })
-
-    setupGracefulExit({ sigName: 'SIGINT', server, exitCode: 0 })
-    setupGracefulExit({ sigName: 'SIGTERM', server, exitCode: 143 })
-  } catch (err) {
-    logger.fatal('Fatal error during initialisation: %j', err)
-    process.exit(1)
-  }
+  app.listen(PORT, (err) => {
+    if (err) throw new Error('Binding failed: ', err)
+    logger.info(`Listening on port ${PORT} `)
+  })
 }
 
 module.exports = { startServer, createHttpServer }

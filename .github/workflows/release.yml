@@ -90,6 +90,8 @@ jobs:
           context: .
           load: true
           file: ./Dockerfile
+          secrets: |
+            github=${{ secrets.GITHUB_TOKEN }}
           tags: |
             ${{ needs.preconditions.outputs.repo_name }}:latest
           labels: |
@@ -120,8 +122,12 @@ jobs:
             ${{ runner.OS }}-
       - name: Install Packages
         run: npm ci
+        env:
+          GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Lint
         run: npm run lint
+        env:
+          GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   dependency-check:
     name: Run dependency check
     runs-on: ubuntu-latest
@@ -141,8 +147,12 @@ jobs:
             ${{ runner.OS }}-
       - name: Install Packages
         run: npm ci
+        env:
+          GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Dependency Check
         run: npm run depcheck
+        env:
+          GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   tests:
     name: Run tests
     runs-on: ubuntu-latest
@@ -162,7 +172,9 @@ jobs:
             ${{ runner.OS }}-
       - name: Install Packages
         run: npm ci
-      - name: Setup dependencies
+        env:
+          GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup integration test dependencies
         run: docker-compose up -d
       - name: Sleep
         uses: kibertoad/wait-action@1.0.1
@@ -170,6 +182,8 @@ jobs:
           time: "30s"
       - name: Run tests
         run: npm run test
+        env:
+          GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   check-version:
     name: "Check version"
     runs-on: ubuntu-latest
@@ -227,6 +241,8 @@ jobs:
           context: .
           file: ./Dockerfile
           platforms: linux/amd64, linux/arm64
+          secrets: |
+            github=${{ secrets.GITHUB_TOKEN }}
           tags: |
             ghcr.io/${{ needs.preconditions.outputs.org_name }}/${{ needs.preconditions.outputs.repo_name }}:${{ needs.check-version.outputs.version }}
             ghcr.io/${{ needs.preconditions.outputs.org_name }}/${{ needs.preconditions.outputs.repo_name }}:latest

@@ -1,0 +1,29 @@
+redis:
+  enabled: true
+  password: redis
+  architecture: standalone
+  auth:
+    password: redis
+mosquitto:
+  enabled: true
+kafka:
+  enabled: true
+waspthingmock:
+  enabled: false
+config:
+  waspIngestTtnPort: 3000
+  redisPort: 6379
+  redisTlsEnabled: false
+  ttnMqttEndpoint: null
+  ttnAppId: blah
+  ttnAppKey: blah
+  waspIngestName: ttn-v2
+  init:
+    registerIngest: true
+    thingServiceName: wasp-thing-service
+    thingServicePort: 80
+image:
+  repository: ghcr.io/digicatapult/wasp-ingest-ttn
+  pullPolicy: IfNotPresent
+  tag: 'v0.0.15'
+  pullSecrets: ['ghcr-digicatapult']

@@ -3,12 +3,12 @@ const env = require('./env')
 
 const logger = pino(
   {
-    name: env.SERVICE_TYPE,
+    name: 'INGEST_TTN',
     level: env.LOG_LEVEL,
   },
   process.stdout
 )
 
-logger.debug('Environment variables: %j', { ...env })
+logger.debug('Environment variables: %j', env)
 
 module.exports = logger

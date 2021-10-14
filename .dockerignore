@@ -4,9 +4,3 @@ coverage
 node_modules
 scripts
 test
-
-.eslintignore
-.eslintrc
-.nycrc
-.prettierrc
-*.md

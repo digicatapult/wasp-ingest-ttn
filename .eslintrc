@@ -10,12 +10,11 @@
     "sourceType": "module"
   },
   "rules": {
-    "prettier/prettier": "error",
-    "no-console": 2
+    "prettier/prettier": "error"
   },
   "overrides": [
     {
-      "files": ["**/test/**/*.test.js"],
+      "files": ["**/test/**/*.js"],
       "rules": {
         "prettier/prettier": "error"
       },
