@@ -1,0 +1,35 @@
+apiVersion: v1
+entries:
+  wasp-ingest-ttn:
+  - apiVersion: v2
+    appVersion: 0.0.15
+    created: "2021-10-14T12:11:08.909948628Z"
+    dependencies:
+    - name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: ^14.1.0
+    - condition: kafka.enabled
+      name: kafka
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.7.3
+    - condition: mosquitto.enabled
+      name: mosquitto
+      repository: https://k8s-at-home.com/charts/
+      version: ^0.7.0
+    - alias: waspthingmock
+      condition: waspthingmock.enabled
+      name: nginx
+      repository: https://charts.bitnami.com/bitnami
+      version: ^8.7.1
+    description: A Helm chart for WASP-INGEST-TTN
+    digest: f915bf6705ccb79a033ae20c367627f80d0db4da14a2ab5990dbde739ed410bb
+    maintainers:
+    - email: opensource@digicatapult.org.uk
+      name: digicatapult
+      url: www.digicatapult.org.uk
+    name: wasp-ingest-ttn
+    type: application
+    urls:
+    - https://digicatapult.github.io/wasp-ingest-ttn/wasp-ingest-ttn-0.0.15.tgz
+    version: 0.0.15
+generated: "2021-10-14T12:11:08.890985546Z"
