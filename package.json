@@ -1,6 +1,6 @@
 {
   "name": "wasp-ingest-ttn",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "WASP Ingest using TTN v2",
   "main": "app/index.js",
   "scripts": {
