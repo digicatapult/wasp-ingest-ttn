@@ -1,4 +1,6 @@
-const Redis = require('ioredis')
+import Redis from 'ioredis'
+
+import env from '../../../app/env.js'
 
 const {
   REDIS_HOST,
@@ -8,9 +10,9 @@ const {
   REDIS_AUTH_USERNAME,
   REDIS_AUTH_PASSWORD,
   REDIS_ENABLE_TLS,
-} = require('../../../app/env')
+} = env
 
-const cleanRedis = async () => {
+export const cleanRedis = async () => {
   const redis = new Redis({
     host: REDIS_HOST,
     port: REDIS_PORT,
@@ -20,8 +22,4 @@ const cleanRedis = async () => {
   })
 
   await redis.flushall()
-}
-
-module.exports = {
-  cleanRedis,
 }

@@ -1,7 +1,9 @@
-const mqtt = require('mqtt')
+import mqtt from 'mqtt'
 
-const globalLogger = require('../logger')
-const { TTN_MQTT_ENDPOINT, TTN_APP_ID, TTN_APP_KEY } = require('../env')
+import globalLogger from '../logger.js'
+import env from '../env.js'
+
+const { TTN_MQTT_ENDPOINT, TTN_APP_ID, TTN_APP_KEY } = env
 
 const setupTTNListener = async (next) => {
   const logger = globalLogger.child({ module: 'ttn' })
@@ -66,4 +68,4 @@ const setupTTNListener = async (next) => {
   })
 }
 
-module.exports = setupTTNListener
+export default setupTTNListener

@@ -1,13 +1,13 @@
-// server to handle health check request
+import express from 'express'
+import pinoHttp from 'pino-http'
 
-const express = require('express')
-const pinoHttp = require('pino-http')
+import startMessagePipeline from './messagePipeline/index.js'
+import env from './env.js'
+import logger from './logger.js'
 
-const startMessagePipeline = require('./messagePipeline')
-const { PORT } = require('./env')
-const logger = require('./logger')
+const { PORT } = env
 
-async function createHttpServer() {
+export async function createHttpServer() {
   const app = express()
 
   const requestLogger = pinoHttp({ logger })
@@ -35,7 +35,7 @@ async function createHttpServer() {
   return app
 }
 
-async function startServer() {
+export async function startServer() {
   const app = await createHttpServer()
 
   app.listen(PORT, (err) => {
@@ -43,5 +43,3 @@ async function startServer() {
     logger.info(`Listening on port ${PORT} `)
   })
 }
-
-module.exports = { startServer, createHttpServer }

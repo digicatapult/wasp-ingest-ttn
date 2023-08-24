@@ -1,8 +1,8 @@
-const { Kafka, logLevel: kafkaLogLevels } = require('kafkajs')
-const mqtt = require('mqtt')
-const delay = require('delay')
+import { Kafka, logLevel as kafkaLogLevels } from 'kafkajs'
+import mqtt from 'mqtt'
+import { setTimeout } from 'node:timers/promises'
 
-const env = require('../../../app/env')
+import env from '../../../app/env.js'
 
 const createPubSub = async () => {
   const mqttClient = mqtt.connect(env.TTN_MQTT_ENDPOINT, {
@@ -34,16 +34,16 @@ const createPubSub = async () => {
     mqttClient.publish(`${env.TTN_APP_ID}/devices/1111111111111111/up`, message)
 
     while (messages.length < expectedMessages) {
-      await delay(10)
+      await setTimeout(10)
     }
-    await delay(waitForExcessMessagesMS)
+    await setTimeout(waitForExcessMessagesMS)
 
     return [...messages]
   }
 
   return new Promise((resolve) => {
     while (!mqttClient.connected) {
-      delay(50)
+      setTimeout(50)
     }
 
     resolve({
@@ -56,4 +56,4 @@ const createPubSub = async () => {
   })
 }
 
-module.exports = createPubSub
+export default createPubSub

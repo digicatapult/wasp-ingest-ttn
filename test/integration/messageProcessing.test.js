@@ -1,10 +1,10 @@
-const { describe, before, it } = require('mocha')
-const { expect } = require('chai')
-const delay = require('delay')
+import { describe, before, it } from 'mocha'
+import { expect } from 'chai'
+import { setTimeout } from 'node:timers/promises'
 
-const { setupServer } = require('./helpers/server')
-const createPubSub = require('./helpers/pubsub')
-const { cleanRedis } = require('./helpers/redis')
+import { setupServer } from './helpers/server.js'
+import createPubSub from './helpers/pubsub.js'
+import { cleanRedis } from './helpers/redis.js'
 
 const defaultMessage = {
   app_id: 'testing',
@@ -140,7 +140,7 @@ describe('Message Processing', function () {
       await pubsub.publishAndWait({
         message: JSON.stringify(defaultMessage),
       })
-      await delay(100)
+      await setTimeout(100)
       context.messages = await pubsub.publishAndWait({
         message: JSON.stringify(defaultMessage),
       })

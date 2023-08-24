@@ -1,4 +1,7 @@
-const Redis = require('ioredis')
+import Redis from 'ioredis'
+
+import env from '../env.js'
+import logger from '../logger.js'
 
 const {
   REDIS_HOST,
@@ -9,8 +12,7 @@ const {
   REDIS_AUTH_PASSWORD,
   REDIS_ENABLE_TLS,
   TTN_DUP_PAYLOAD_WINDOW_MS,
-} = require('../env')
-const logger = require('../logger')
+} = env
 
 const setupDeduplicator = (next) => {
   const redis = new Redis({
@@ -35,4 +37,4 @@ const setupDeduplicator = (next) => {
   }
 }
 
-module.exports = setupDeduplicator
+export default setupDeduplicator

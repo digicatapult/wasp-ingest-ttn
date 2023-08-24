@@ -42,7 +42,7 @@ npm test
 | REDIS_PORT                      |    Y     |                -                  | Redis port                                                                               |
 | REDIS_KEY_PREFIX                |    N     |           `INGEST_TTN`            | Redis key prefix                                                                         |
 | REDIS_ENABLE_TLS                |    N     |             `false`               | Flag to enable TLS in Redis                                                              |
-| KAFKA_BROKERS                   |    N     |         `localhost:9092`          | List of addresses for the Kafka brokers                                                  |
+| KAFKA_BROKERS                   |    N     |         `['localhost:9092']`          | List of addresses for the Kafka brokers                                                  |
 | KAFKA_PAYLOAD_TOPIC             |    N     |          `raw-payloads`           | Topic to publish payloads to                                                             |
 | TTN_DUP_PAYLOAD_WINDOW_MS       |    N     |              60000                | Set the window for catching duplicate payloads (milliseconds)                            |
 | WASP_INGEST_NAME                |    N     |            `ttn_v2`               | Name of this ingest type                                                                 |

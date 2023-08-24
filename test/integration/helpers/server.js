@@ -1,13 +1,11 @@
-const request = require('supertest')
+import request from 'supertest'
 
-const { createHttpServer } = require('../../../app/server')
+import { createHttpServer } from '../../../app/server.js'
 
 let server = null
-const setupServer = async (context) => {
+export const setupServer = async (context) => {
   if (!server) {
     server = await createHttpServer()
   }
   context.request = request(server)
 }
-
-module.exports = { setupServer }
