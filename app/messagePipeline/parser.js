@@ -1,10 +1,12 @@
-const uuid = require('uuid')
-const { WASP_INGEST_NAME } = require('../env')
+import { v4 } from 'uuid'
+import env from '../env.js'
+
+const { WASP_INGEST_NAME } = env
 
 const setupParser = (next) => {
   return (payload) => {
     const hardwareSerial = payload.hardware_serial
-    const payloadId = uuid.v4()
+    const payloadId = v4()
     const gateways = (payload.metadata && payload.metadata.gateways) || []
 
     next({
@@ -35,4 +37,4 @@ const setupParser = (next) => {
   }
 }
 
-module.exports = setupParser
+export default setupParser

@@ -1,8 +1,9 @@
-const envalid = require('envalid')
+import envalid from 'envalid'
+import dotenv from 'dotenv'
 
 const options = { strict: true }
 if (process.env.NODE_ENV === 'test') {
-  options.dotEnvPath = 'test/test.env'
+  dotenv.config({ path: 'test/test.env' })
 }
 
 const { REDIS_AUTH_ENABLED } = envalid.cleanEnv(
@@ -46,7 +47,7 @@ const vars = envalid.cleanEnv(
       const kafkaSet = new Set(input === '' ? [] : input.split(','))
       if (kafkaSet.size === 0) throw new Error('At least one kafka broker must be configured')
       return [...kafkaSet]
-    })({ default: 'localhost:9092' }),
+    })({ default: ['localhost:9092'] }),
     KAFKA_PAYLOAD_TOPIC: envalid.str({ default: 'raw-payloads' }),
     TTN_DUP_PAYLOAD_WINDOW_MS: envalid.num({ default: 60000 }),
     WASP_INGEST_NAME: envalid.str({ default: 'ttn_v2' }),
@@ -54,7 +55,7 @@ const vars = envalid.cleanEnv(
   options
 )
 
-module.exports = {
+export default {
   ...vars,
   REDIS_AUTH_ENABLED,
 }
