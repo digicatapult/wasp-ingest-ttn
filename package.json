@@ -1,6 +1,6 @@
 {
   "name": "wasp-ingest-ttn",
-  "version": "0.0.16",
+  "version": "1.0.0",
   "description": "WASP Ingest using TTN v2",
   "type": "module",
   "main": "app/index.js",
@@ -32,7 +32,6 @@
   },
   "homepage": "https://github.com/digicatapult/wasp-ingest-ttn#readme",
   "devDependencies": {
-    "delay": "6.0.0",
     "chai": "^4.3.7",
     "depcheck": "^1.4.5",
     "eslint": "^8.47.0",
