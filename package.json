@@ -1,6 +1,6 @@
 {
   "name": "wasp-ingest-ttn",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "WASP Ingest using TTN v2",
   "type": "module",
   "main": "app/index.js",
@@ -32,16 +32,16 @@
   },
   "homepage": "https://github.com/digicatapult/wasp-ingest-ttn#readme",
   "devDependencies": {
-    "chai": "^4.3.7",
+    "chai": "^4.3.8",
     "depcheck": "^1.4.5",
-    "eslint": "^8.47.0",
+    "eslint": "^8.49.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "mocha": "^10.2.0",
     "nodemon": "^3.0.1",
     "c8": "^8.0.1",
     "pino-colada": "^2.2.2",
-    "prettier": "^3.0.2",
+    "prettier": "^3.0.3",
     "supertest": "^6.3.3"
   },
   "dependencies": {
@@ -50,9 +50,9 @@
     "express": "^4.18.2",
     "ioredis": "^5.3.2",
     "kafkajs": "^2.2.4",
-    "mqtt": "^5.0.3",
-    "pino": "^8.15.0",
-    "pino-http": "^8.4.0",
+    "mqtt": "^5.0.5",
+    "pino": "^8.15.1",
+    "pino-http": "^8.5.0",
     "uuid": "^9.0.0"
   }
 }
