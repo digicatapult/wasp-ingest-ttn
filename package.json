@@ -1,6 +1,6 @@
 {
   "name": "wasp-ingest-ttn",
-  "version": "1.0.31",
+  "version": "1.0.32",
   "description": "WASP Ingest using TTN v2",
   "type": "module",
   "main": "app/index.js",
@@ -35,7 +35,7 @@
     "chai": "^4.3.10",
     "depcheck": "^1.4.7",
     "eslint": "^8.55.0",
-    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.0.1",
     "mocha": "^10.2.0",
     "nodemon": "^3.0.2",
