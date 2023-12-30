@@ -1,6 +1,6 @@
 {
   "name": "wasp-ingest-ttn",
-  "version": "1.0.43",
+  "version": "1.0.44",
   "description": "WASP Ingest using TTN v2",
   "type": "module",
   "main": "app/index.js",
@@ -52,7 +52,7 @@
     "kafkajs": "^2.2.4",
     "mqtt": "^5.3.4",
     "pino": "^8.17.2",
-    "pino-http": "^8.6.0",
+    "pino-http": "^8.6.1",
     "uuid": "^9.0.1"
   }
 }
