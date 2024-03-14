@@ -1,5 +1,9 @@
 # wasp-ingest-ttn
 
+## Deprecation Notice
+`WASP` was deprecated on March 14th 2024, there will be no further dependency or security updates to this platform.
+---
+
 WASP Ingest for TTN v2
 
 Connects to a [TTN](https://www.thethingsnetwork.org/) supplied MQTT broker. Parses and reformats messages from LoRaWAN devices on the TTN network, then forwards them to be used throughout the rest of WASP.
